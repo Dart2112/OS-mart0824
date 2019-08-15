@@ -10,24 +10,9 @@ const char* COLS = 0xd800;
 const char BLACK = 0;
 const char WHITE = 1;
 
-char[] MESSAGE = "checkpoint 2.2 by mart0824";
+char[] MESSAGE = "checkpoint 2.3 by mart0824";
 
 void main(){
-	*VIC_MEMORY = 0x14;
-	memset(SCREEN, ' ', 40*25);
-	memset(COLS, WHITE, 40*25);
-	char* sc = SCREEN+40;
-	char* msg = MESSAGE;
-	while(*msg){
-		*sc++ = *msg++;
-	}
-	while(true) {
-		if(*RASTER==54 || *RASTER==66) {
-			*BGCOL = WHITE;
-		}else{
-			*BGCOL = BLACK;
-		}
-	}
 }
 
 void exit_hypervisor() {
@@ -89,12 +74,12 @@ void syscall11(){
 	exit_hypervisor();
 }
 
-void syscall12(){
+void secureEntr(){
 	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
-void syscall13(){
+void secureExit(){
 	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
@@ -354,6 +339,52 @@ void syscall64(){
 	exit_hypervisor();
 }
 
+void reset(){
+  *VIC_MEMORY = 0x14;
+  memset(SCREEN, ' ', 40*25);
+  memset(COLS, WHITE, 40*25);
+  char* sc = SCREEN+40;
+  char* msg = MESSAGE;
+  while(*msg){
+    *sc++ = *msg++;
+  }
+  while(true) {
+    if(*RASTER==54 || *RASTER==66) {
+      *BGCOL = WHITE;
+    }else{
+      *BGCOL = BLACK;
+    }
+  }
+}
+
+void restoreKey(){
+  exit_hypervisor();
+}
+
+void altTabKey(){
+  exit_hypervisor();
+}
+
+void vF011Rd(){
+  exit_hypervisor();
+}
+
+void vF011Wr(){
+  exit_hypervisor();
+}
+
+void reserved(){
+  exit_hypervisor();
+}
+
+void CpuKill(){
+  exit_hypervisor();
+}
+
+void undefined_trap(){
+  exit_hypervisor();
+}
+
 #pragma data_seg(Syscall)
 
 struct SysCall {
@@ -377,8 +408,8 @@ export struct SysCall[] SYSCALLS = {
 	{ JMP, &syscall9, NOP},
 	{ JMP, &syscall10, NOP},
 	{ JMP, &syscall11, NOP},
-	{ JMP, &syscall12, NOP},
-	{ JMP, &syscall13, NOP},
+	{ JMP, &secureEntr, NOP},
+	{ JMP, &secureExit, NOP},
 	{ JMP, &syscall14, NOP},
 	{ JMP, &syscall15, NOP},
 	{ JMP, &syscall16, NOP},
@@ -433,53 +464,53 @@ export struct SysCall[] SYSCALLS = {
 };
 
 export align(0x100) struct SysCall[] TRAPS = {
-  { JMP, &main, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP},
-  { JMP, &syscall1, NOP}
+  { JMP, &reset, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &restoreKey, NOP},
+  { JMP, &altTabKey, NOP},
+  { JMP, &vF011Rd, NOP},
+  { JMP, &vF011Wr, NOP},
+  { JMP, &reserved, NOP},
+  { JMP, &CpuKill, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP},
+  { JMP, &undefined_trap, NOP}
 };
