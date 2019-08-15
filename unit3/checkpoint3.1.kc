@@ -360,6 +360,7 @@ void reset(){
   char* sc = SCREEN+40;
   char* msg = MESSAGE;
   print_to_screen("mart0824 operating system stating");
+  while(true){}
 }
 
 void restoreKey(){

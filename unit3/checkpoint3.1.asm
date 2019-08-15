@@ -69,7 +69,8 @@ reset: {
     sta.z memset.num+1
     jsr memset
     jsr print_to_screen
-    rts
+  b1:
+    jmp b1
   .segment Data
     message: .text "mart0824 operating system stating"
     .byte 0
