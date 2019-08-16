@@ -373,10 +373,6 @@ void vF011Wr(){
   exit_hypervisor();
 }
 
-void reserved(){
-  exit_hypervisor();
-}
-
 void CpuKill(){
   exit_hypervisor();
 }
