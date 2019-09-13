@@ -360,6 +360,8 @@ void reset(){
   char* sc = SCREEN+40;
   char* msg = MESSAGE;
   print_to_screen("mart0824 operating system stating");
+  print_newline();
+  print_to_screen("testing hardware");
   while(true){}
 }
 
