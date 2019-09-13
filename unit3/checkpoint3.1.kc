@@ -9,10 +9,24 @@ const char* BGCOL = 0xd021;
 const char* COLS = 0xd800;
 const char BLACK = 0;
 const char WHITE = 1;
+unsigned char *current_screen_line = $0400;
+unsigned char current_screen_x = 0;
 
 char[] MESSAGE = "checkpoint 2.3 by mart0824";
 
 void main(){
+}
+
+void print_to_screen(char *message){
+  while(*message){
+    *current_screen_line++ = *message++;
+    current_screen_x++;
+  }
+}
+
+void print_newline() {
+	current_screen_line++;
+	current_screen_x = 0;
 }
 
 void exit_hypervisor() {
@@ -345,15 +359,7 @@ void reset(){
   memset(COLS, WHITE, 40*25);
   char* sc = SCREEN+40;
   char* msg = MESSAGE;
-  while(*msg){
-    *sc++ = *msg++;
-  }
-  while(true) {
-    if(*RASTER==54 || *RASTER==66) {
-      *BGCOL = WHITE;
-    }else{
-      *BGCOL = BLACK;
-    }
+  print_to_screen("mart0824 operating system stating");
   }
 }
 
