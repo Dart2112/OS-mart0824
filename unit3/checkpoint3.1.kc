@@ -25,7 +25,7 @@ void print_to_screen(char *message){
 }
 
 void print_newline() {
-	current_screen_line++;
+	current_screen_line += 40 - current_screen_x;
 	current_screen_x = 0;
 }
 
@@ -359,7 +359,7 @@ void reset(){
   memset(COLS, WHITE, 40*25);
   char* sc = SCREEN+40;
   char* msg = MESSAGE;
-  print_to_screen("mart0824 operating system stating");
+  print_to_screen("mart0824 operating system stating...");
   print_newline();
   print_to_screen("testing hardware");
   while(true){}

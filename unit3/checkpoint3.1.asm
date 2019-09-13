@@ -68,25 +68,34 @@ reset: {
     lda #>$28*$19
     sta.z memset.num+1
     jsr memset
+    lda #<$400
+    sta.z current_screen_line
+    lda #>$400
+    sta.z current_screen_line+1
+    lda #<message
+    sta.z print_to_screen.message
+    lda #>message
+    sta.z print_to_screen.message+1
+    jsr print_to_screen
+    jsr print_newline
+    lda #<message1
+    sta.z print_to_screen.message
+    lda #>message1
+    sta.z print_to_screen.message+1
     jsr print_to_screen
   b1:
     jmp b1
   .segment Data
-    message: .text "mart0824 operating system stating"
+    message: .text "mart0824 operating system stating..."
+    .byte 0
+    message1: .text "testing hardware"
     .byte 0
 }
 .segment Code
 // print_to_screen(byte* zeropage(4) message)
 print_to_screen: {
     .label message = 4
-    lda #<$400
-    sta.z current_screen_line
-    lda #>$400
-    sta.z current_screen_line+1
-    lda #<reset.message
-    sta.z message
-    lda #>reset.message
-    sta.z message+1
+    ldx #0
   b1:
     ldy #0
     lda (message),y
@@ -105,7 +114,21 @@ print_to_screen: {
     bne !+
     inc.z message+1
   !:
+    inx
     jmp b1
+}
+print_newline: {
+    txa
+    eor #$ff
+    clc
+    adc #$28+1
+    clc
+    adc.z current_screen_line
+    sta.z current_screen_line
+    bcc !+
+    inc.z current_screen_line+1
+  !:
+    rts
 }
 // Copies the character c (an unsigned char) to the first num characters of the object pointed to by the argument str.
 // memset(void* zeropage(6) str, byte register(X) c, word zeropage(4) num)
