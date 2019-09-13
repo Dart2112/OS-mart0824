@@ -24,7 +24,7 @@ void print_to_screen(char *message){
   }
 }
 
-void print_hex(unsigned short *value) {
+void print_hex(unsigned short value) {
   char[5] hex;
   unsigned char i;
   for(i=0;i<4;i++){
@@ -41,26 +41,28 @@ void print_newline() {
 }
 
 void test_memory() {
-  unsigned short *mem_start = $0800;
-  unsigned short *mem_end = $0800;
+  unsigned short mem_start = $0800;
+  unsigned short mem_end = $0800;
   bool failed = false;
-  for(unsigned short *current_mem = mem_start; current_mem < $7FFF; current_mem++){
-    for(unsigned int i = 0; i < 255; i++){
-      *current_mem = i;
-      if(*current_mem != i) {
+  for(unsigned short *current_mem = $0800; current_mem <= $7FFF; current_mem++){
+    for(byte b = 0; b < 255; b++){
+      *current_mem = b;
+      byte b0 = (byte) (*current_mem);
+      if(b0 != b) {
         print_newline();
-        print_to_screen("memory error at ");
-        print_hex(current_mem);
-        mem_end = current_mem - 1;
+        print_to_screen("memory error at $");
+        print_hex((unsigned short) current_mem);
+        mem_end = ((unsigned short) current_mem) - 1;
         failed = true;
       }
     }
     if(failed) break;
-    mem_end = current_mem;
+    mem_end = (unsigned short) current_mem;
   }
-  print_to_screen("Memory found at ");
+  print_newline();
+  print_to_screen("memory found at $");
   print_hex(mem_start);
-  print_to_screen(" - ");
+  print_to_screen(" - $");
   print_hex(mem_end);
 }
 
