@@ -27,19 +27,19 @@ checkpoint4.1.bin:	checkpoint4.1.kc
 	${HOME}/OS2019StudentMaterial/kickc/bin/kickc.sh -a $<
 
 test4.1:	checkpoint4.1.bin userspace4.1.prg
-	./check_if_committed && xmega65 -loadrom userspace4.1.prg -kickup checkpoint4.1.bin
+	xmega65 -loadrom userspace4.1.prg -kickup checkpoint4.1.bin
 
 checkpoint4.2.bin:	checkpoint4.2.kc
 	${HOME}/OS2019StudentMaterial/kickc/bin/kickc.sh -a $<
 
 test4.2:	checkpoint4.2.bin userspace4.2.prg
-	./check_if_committed && xmega65 -kickup checkpoint4.2.bin -loadrom userspace4.2.prg
+	xmega65 -kickup checkpoint4.2.bin -loadrom userspace4.2.prg
 
 checkpoint4.3.bin:	checkpoint4.3.kc
 	${HOME}/OS2019StudentMaterial/kickc/bin/kickc.sh  -a $<
 
 test4.3:	checkpoint4.3.bin userspace4.3.prg
-	./check_if_committed && xmega65 -kickup checkpoint4.3.bin -loadrom userspace4.3.prg
+	xmega65 -kickup checkpoint4.3.bin -loadrom userspace4.3.prg
 
 checkpoint4.4.bin:	checkpoint4.4.kc
 	${HOME}/OS2019StudentMaterial/kickc/bin/kickc.sh  -a $<
