@@ -56,8 +56,6 @@ restoreKey: {
     rts
 }
 reset: {
-    .label sc = 4
-    .label msg = 2
     lda #<$400
     sta.z current_screen_line
     lda #>$400
@@ -86,46 +84,25 @@ reset: {
     lda #>$28*$19
     sta.z memset.num+1
     jsr memset
-    lda #<SCREEN+$28
-    sta.z sc
-    lda #>SCREEN+$28
-    sta.z sc+1
     lda #<MESSAGE
-    sta.z msg
+    sta.z print_to_screen.message
     lda #>MESSAGE
-    sta.z msg+1
-  __b1:
-    ldy #0
-    lda (msg),y
-    cmp #0
-    bne __b2
+    sta.z print_to_screen.message+1
+    jsr print_to_screen
     jsr start_simple_program
-  __b4:
+  __b1:
     lda #$36
     cmp RASTER
-    beq __b5
+    beq __b2
     lda #$42
     cmp RASTER
-    beq __b5
+    beq __b2
     lda #BLACK
     sta BGCOL
-    jmp __b4
-  __b5:
+    jmp __b1
+  __b2:
     lda #WHITE
     sta BGCOL
-    jmp __b4
-  __b2:
-    ldy #0
-    lda (msg),y
-    sta (sc),y
-    inc.z sc
-    bne !+
-    inc.z sc+1
-  !:
-    inc.z msg
-    bne !+
-    inc.z msg+1
-  !:
     jmp __b1
 }
 start_simple_program: {
@@ -170,13 +147,34 @@ start_simple_program: {
     jsr exit_hypervisor
     rts
 }
+// print_to_screen(byte* zeropage(2) message)
+print_to_screen: {
+    .label message = 2
+  __b1:
+    ldy #0
+    lda (message),y
+    cmp #0
+    bne __b2
+    rts
+  __b2:
+    ldy #0
+    lda (message),y
+    ldy.z current_screen_x
+    sta (current_screen_line),y
+    inc.z message
+    bne !+
+    inc.z message+1
+  !:
+    inc.z current_screen_x
+    jmp __b1
+}
 // Copies the character c (an unsigned char) to the first num characters of the object pointed to by the argument str.
-// memset(void* zeropage(4) str, byte register(X) c, word zeropage(2) num)
+// memset(void* zeropage(6) str, byte register(X) c, word zeropage(4) num)
 memset: {
-    .label end = 2
-    .label dst = 4
-    .label num = 2
-    .label str = 4
+    .label end = 4
+    .label dst = 6
+    .label num = 4
+    .label str = 6
     lda.z num
     bne !+
     lda.z num+1
@@ -582,62 +580,49 @@ syscall02: {
 }
 syscall01: {
     jsr print_newline
+    lda #<message
+    sta.z print_to_screen.message
+    lda #>message
+    sta.z print_to_screen.message+1
     jsr print_to_screen
     jsr exit_hypervisor
     rts
+  .segment Data
+    message: .text "syscall01 entered"
+    .byte 0
 }
-// print_to_screen(byte* zeropage(6) message)
-print_to_screen: {
-    .label message = 6
-    lda #<message
-    sta.z message
-    lda #>message
-    sta.z message+1
-  __b1:
-    ldy #0
-    lda (message),y
-    cmp #0
-    bne __b2
-    rts
-  __b2:
-    ldy #0
-    lda (message),y
-    sta (current_screen_line),y
-    inc.z current_screen_line
-    bne !+
-    inc.z current_screen_line+1
-  !:
-    inc.z message
-    bne !+
-    inc.z message+1
-  !:
-    inc.z current_screen_x
-    jmp __b1
-}
+.segment Code
 print_newline: {
+    .label __0 = $b
     lda #$28
-    sec
-    sbc.z current_screen_x
     clc
     adc.z current_screen_line
+    sta.z __0
+    lda #0
+    adc.z current_screen_line+1
+    sta.z __0+1
+    lda.z __0
     sta.z current_screen_line
-    bcc !+
-    inc.z current_screen_line+1
-  !:
+    lda.z __0+1
+    sta.z current_screen_line+1
     lda #0
     sta.z current_screen_x
     rts
 }
 syscall00: {
     jsr print_newline
+    lda #<message
+    sta.z print_to_screen.message
+    lda #>message
+    sta.z print_to_screen.message+1
     jsr print_to_screen
     jsr exit_hypervisor
     rts
+  .segment Data
+    message: .text "syscall00 entered"
+    .byte 0
 }
-.segment Data
   MESSAGE: .text "checkpoint 4.2 by mart0824"
-  .byte 0
-  message: .text "syscall00 entered"
   .byte 0
 .segment Syscall
   SYSCALLS: .byte JMP

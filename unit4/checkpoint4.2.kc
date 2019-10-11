@@ -12,20 +12,20 @@ const char WHITE = 1;
 volatile unsigned char *current_screen_line;
 volatile unsigned char current_screen_x;
 
-char[] MESSAGE = "checkpoint 4.2 by mart0824";
+char[] MESSAGE = "checkpoint 4.3 by mart0824";
 
 void main(){
 }
 
 void print_to_screen(char *message){
   while(*message){
-    *current_screen_line++ = *message++;
+    *(current_screen_line + current_screen_x) = *message++;
     current_screen_x++;
   }
 }
 
 void print_newline() {
-	current_screen_line += 40 - current_screen_x;
+	current_screen_line = current_screen_line + 40;
 	current_screen_x = 0;
 }
 
@@ -67,7 +67,7 @@ void syscall00(){
 
 void syscall01(){
 	print_newline();
-	print_to_screen("syscall00 entered");
+	print_to_screen("syscall01 entered");
 	exit_hypervisor();
 }
 
@@ -387,11 +387,7 @@ void reset(){
   *VIC_MEMORY = 0x14;
   memset(SCREEN, ' ', 40*25);
   memset(COLS, WHITE, 40*25);
-  char* sc = SCREEN+40;
-  char* msg = MESSAGE;
-  while(*msg){
-    *sc++ = *msg++;
-  }
+  print_to_screen(MESSAGE);
   start_simple_program();
   while(true) {
     if(*RASTER==54 || *RASTER==66) {
