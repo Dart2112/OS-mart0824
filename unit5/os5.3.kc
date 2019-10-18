@@ -20,6 +20,7 @@ const char WHITE = 1;
 
 char[] MESSAGE = "checkpoint 5.3";
 
+const unsigned char STATE_NOTRUNNING = $00;
 const unsigned char STATE_NEW = $01;
 const unsigned char STATE_READY = $02;
 const unsigned char STATE_READYSUSPENDED = $03;
