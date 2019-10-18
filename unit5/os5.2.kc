@@ -472,16 +472,24 @@ void reset(){
   *VIC_MEMORY = 0x14;
   memset(SCREEN, ' ', 40*25);
   memset(COLS, WHITE, 40*25);
-  char* sc = SCREEN+40;
-  char* msg = MESSAGE;
-  print_newline();
+
+  
   current_screen_line = SCREEN;
+
   print_newline();
+  print_to_screen(MESSAGE);
   print_newline();
   print_newline();
   initialise_pdb(0,"program1.prg");
   describe_pdb(0);
-  while(true){}
+
+  while(true){
+    if(*RASTER==54 || *RASTER==66){
+      *BGCOL = WHITE;
+    }else{
+      *BGCOL = BLUE;
+    }
+  }
 }
 
 void restoreKey(){

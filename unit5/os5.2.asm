@@ -13,18 +13,27 @@
   .const OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORAGE_START_ADDRESS = 4
   .const OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORAGE_END_ADDRESS = 8
   .const OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORED_STATE = $c
+  .const OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_PROCESS_STATE = 1
+  .label RASTER = $d012
   .label VIC_MEMORY = $d018
   .label SCREEN = $400
+  .label BGCOL = $d021
   .label COLS = $d800
+  .const BLUE = 6
   .const WHITE = 1
+  .const STATE_NOTRUNNING = 0
   // Process stored state will live at $C000-$C7FF, with 256 bytes
   // for each process reserved
   .label stored_pdbs = $c000
+  // 8 processes x 16 bytes = 128 bytes for names
+  .label process_names = $c800
+  // 8 processes x 64 bytes context state = 512 bytes
+  .label process_context_states = $c900
   .const JMP = $4c
   .const NOP = $ea
-  .label current_screen_line = 2
-  .label current_screen_x = $a
-  .label pid_counter = $b
+  .label current_screen_line = $a
+  .label current_screen_x = 2
+  .label pid_counter = $c
   lda #<SCREEN
   sta.z current_screen_line
   lda #>SCREEN
@@ -91,22 +100,43 @@ reset: {
     lda #>$28*$19
     sta.z memset.num+1
     jsr memset
-    jsr print_newline
     lda #<SCREEN
     sta.z current_screen_line
     lda #>SCREEN
     sta.z current_screen_line+1
+    lda #<MESSAGE
+    sta.z print_to_screen.c
+    lda #>MESSAGE
+    sta.z print_to_screen.c+1
+    jsr print_to_screen
     jsr print_newline
     jsr print_newline
     jsr print_newline
+    jsr initialise_pdb
     jsr describe_pdb
   __b1:
+    lda #$36
+    cmp RASTER
+    beq __b2
+    lda #$42
+    cmp RASTER
+    beq __b2
+    lda #BLUE
+    sta BGCOL
     jmp __b1
+  __b2:
+    lda #WHITE
+    sta BGCOL
+    jmp __b1
+  .segment Data
+    name: .text "program1.prg"
+    .byte 0
 }
+.segment Code
 describe_pdb: {
     .label p = stored_pdbs
-    .label n = $e
-    .label ss = 4
+    .label n = $11
+    .label ss = 8
     lda #<message
     sta.z print_to_screen.c
     lda #>message
@@ -246,11 +276,11 @@ print_newline: {
     sta.z current_screen_x
     rts
 }
-// print_hex(word zeropage(4) value)
+// print_hex(word zeropage(8) value)
 print_hex: {
-    .label __3 = $c
-    .label __6 = $e
-    .label value = 4
+    .label __3 = $11
+    .label __6 = $13
+    .label value = 8
     ldx #0
   __b1:
     cpx #8
@@ -324,7 +354,7 @@ print_hex: {
 }
 .segment Code
 print_to_screen: {
-    .label c = 4
+    .label c = 8
   __b1:
     ldy #0
     lda (c),y
@@ -343,10 +373,10 @@ print_to_screen: {
   !:
     jmp __b1
 }
-// print_dhex(dword zeropage(6) value)
+// print_dhex(dword zeropage(3) value)
 print_dhex: {
-    .label __0 = $10
-    .label value = 6
+    .label __0 = $d
+    .label value = 3
     lda #0
     sta.z __0+2
     sta.z __0+3
@@ -365,13 +395,154 @@ print_dhex: {
     jsr print_hex
     rts
 }
+// Setup a new process descriptor block
+initialise_pdb: {
+    .label p = stored_pdbs
+    .label pn = $11
+    .label ss = $13
+    jsr next_free_pid
+    lda.z next_free_pid.pid
+    // Setup process ID
+    sta p
+    // Setup process name 
+    // (32 bytes space for each to fit 16 chars + nul)
+    // (we could just use 17 bytes, but kickc can't multiply by 17)
+    lda #<process_names
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_PROCESS_NAME
+    lda #>process_names
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_PROCESS_NAME+1
+    lda p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_PROCESS_NAME
+    sta.z pn
+    lda p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_PROCESS_NAME+1
+    sta.z pn+1
+    ldy #0
+  __b1:
+    cpy #$10
+    bcc __b2
+    // Set process state as not running.
+    lda #STATE_NOTRUNNING
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_PROCESS_STATE
+    // Set stored memory area
+    // (for now, we just use fixed 8KB steps from $30000-$3FFFF
+    // corresponding to the PDB number
+    lda #<$30000
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORAGE_START_ADDRESS
+    lda #>$30000
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORAGE_START_ADDRESS+1
+    lda #<$30000>>$10
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORAGE_START_ADDRESS+2
+    lda #>$30000>>$10
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORAGE_START_ADDRESS+3
+    lda #<$31fff
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORAGE_END_ADDRESS
+    lda #>$31fff
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORAGE_END_ADDRESS+1
+    lda #<$31fff>>$10
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORAGE_END_ADDRESS+2
+    lda #>$31fff>>$10
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORAGE_END_ADDRESS+3
+    // 64 bytes context switching state for each process
+    lda #<process_context_states
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORED_STATE
+    lda #>process_context_states
+    sta p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORED_STATE+1
+    lda p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORED_STATE
+    sta.z ss
+    lda p+OFFSET_STRUCT_PROCESS_DESCRIPTOR_BLOCK_STORED_STATE+1
+    sta.z ss+1
+    ldy #0
+  __b4:
+    cpy #$3f
+    bcc __b5
+    // Set tandard CPU flags (8-bit stack, interrupts disabled)
+    lda #$24
+    ldy #7
+    sta (ss),y
+    ldy #5
+    lda #<$1ff
+    sta (ss),y
+    iny
+    lda #>$1ff
+    sta (ss),y
+    ldy #8
+    lda #<$80d
+    sta (ss),y
+    iny
+    lda #>$80d
+    sta (ss),y
+    rts
+  __b5:
+    lda #0
+    sta (ss),y
+    iny
+    jmp __b4
+  __b2:
+    lda reset.name,y
+    sta (pn),y
+    iny
+    jmp __b1
+}
+next_free_pid: {
+    .label __2 = $13
+    .label pid = 7
+    .label p = $13
+    .label i = 8
+    inc.z pid_counter
+    // Start with the next process ID
+    lda.z pid_counter
+    sta.z pid
+    ldx #1
+  __b1:
+    cpx #0
+    bne b1
+    rts
+  b1:
+    ldx #0
+    txa
+    sta.z i
+    sta.z i+1
+  __b2:
+    lda.z i+1
+    cmp #>8
+    bcc __b3
+    bne !+
+    lda.z i
+    cmp #<8
+    bcc __b3
+  !:
+    jmp __b1
+  __b3:
+    lda.z i
+    sta.z __2+1
+    lda #0
+    sta.z __2
+    clc
+    lda.z p
+    adc #<stored_pdbs
+    sta.z p
+    lda.z p+1
+    adc #>stored_pdbs
+    sta.z p+1
+    ldy #0
+    lda (p),y
+    cmp.z pid
+    bne __b4
+    inc.z pid
+    ldx #1
+  __b4:
+    inc.z i
+    bne !+
+    inc.z i+1
+  !:
+    jmp __b2
+}
 // Copies the character c (an unsigned char) to the first num characters of the object pointed to by the argument str.
-// memset(void* zeropage($c) str, byte register(X) c, word zeropage($e) num)
+// memset(void* zeropage($11) str, byte register(X) c, word zeropage(8) num)
 memset: {
-    .label end = $e
-    .label dst = $c
-    .label num = $e
-    .label str = $c
+    .label end = 8
+    .label dst = $11
+    .label num = 8
+    .label str = $11
     lda.z num
     bne !+
     lda.z num+1
@@ -659,6 +830,9 @@ syscall1: {
     jsr exit_hypervisor
     rts
 }
+.segment Data
+  MESSAGE: .text "checkpoint 5.2"
+  .byte 0
 .segment Syscall
   SYSCALLS: .byte JMP
   .word syscall1
