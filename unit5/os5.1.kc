@@ -26,23 +26,23 @@ const unsigned char STATE_RUNNING = $01;
 // Process Descriptor Block definition
 struct process_descriptor_block {
   // Unique identifier for the process
-  XXX - You need to add something here
+  unsigned char process_id;
 
   // Current state of the process
-  XXX - You need to add something here
+  unsigned char process_state;
 
   // Human readable name of the process
-  XXX - You need to add something here
+  char* process_name;
   
   // Where this process is stored when not running
   // i.e., where in the $20000-$5FFFF memory range the
   // process is stored when not running.
-  XXX - You need to add something here
-  XXX - You need to add something here
+  unsignd long storage_start_address;
+  unsigned long storage_end_address;
  
   // Stored registers and related machine state for this
   // process (for the $D640-$D67E machine state registers)
-  XXX - You need to add something here
+  unsigned char* stored_state;
   
 };
 
@@ -138,6 +138,17 @@ void describe_pdb(unsigned char pdb_number)
 
 XXX - Copy in your syscalls, RESET() function and entry point tables from
       checkpoint3.1
+void reset(){
+  *VIC_MEMORY = 0x14;
+  memset(SCREEN, ' ', 40*25);
+  memset(COLS, WHITE, 40*25);
+  char* sc = SCREEN+40;
+  char* msg = MESSAGE;
+  print_to_screen("mart0824 operating system stating...");
+  print_newline();
+  print_to_screen("testing hardware");
+  while(true){}
+}
 
 XXX - Now add the following lines to your RESET() function just before the
       "// Loop forever with 2 bars"

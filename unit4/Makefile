@@ -39,7 +39,7 @@ checkpoint4.3.bin:	checkpoint4.3.kc
 	${HOME}/OS2019StudentMaterial/kickc/bin/kickc.sh  -a $<
 
 test4.3:	checkpoint4.3.bin userspace4.3.prg
-	xmega65 -kickup checkpoint4.3.bin -loadrom userspace4.3.prg
+	./check_if_committed && xmega65 -kickup checkpoint4.3.bin -loadrom userspace4.3.prg
 
 checkpoint4.4.bin:	checkpoint4.4.kc
 	${HOME}/OS2019StudentMaterial/kickc/bin/kickc.sh  -a $<

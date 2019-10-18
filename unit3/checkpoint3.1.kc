@@ -34,322 +34,258 @@ void exit_hypervisor() {
 }
 
 void syscall1(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall2(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall3(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall4(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall5(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall6(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall7(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall8(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall9(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall10(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall11(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void secureEntr(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void secureExit(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall14(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall15(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall16(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall17(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall18(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall19(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall20(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall21(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall22(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall23(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall24(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall25(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall26(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall27(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall28(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall29(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall30(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall31(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall32(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall33(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall34(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall35(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall36(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall37(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall38(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall39(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall40(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall41(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall42(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall43(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall44(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall45(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall46(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall47(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall48(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall49(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall50(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall51(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall52(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall53(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall54(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall55(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall56(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall57(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall58(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall59(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall60(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall61(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall62(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall63(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
 void syscall64(){
-	*(SCREEN+79) = '>';
 	exit_hypervisor();
 }
 
