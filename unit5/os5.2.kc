@@ -36,8 +36,6 @@ struct process_descriptor_block {
   unsigned char* stored_state;
 };
 
-void main(){}
-
 // Process stored state will live at $C000-$C7FF, with 256 bytes
 // for each process reserved
 const unsigned char *stored_pdbs = $C000;
