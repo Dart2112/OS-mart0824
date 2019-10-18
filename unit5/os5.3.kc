@@ -838,10 +838,3 @@ export align(0x100) struct SysCall[] TRAPS = {
   { JMP, &undefined_trap, NOP},
   { JMP, &CpuKill, NOP}
 };
-XXX -  Copy your syscall handler functions from os5.2.kc
-XXX - Don't forget to add describe_pdb(running_pdb); to your handler for SYSCALL $03
-
-XXX - Copy your RESET() routine from os5.2.kc
-XXX - Don't forget to call resume_pdb(0) immediately after load_program(0)
-
-XXX - Copy your trap handler functions and entry point tables from os5.2.kc
