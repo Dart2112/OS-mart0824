@@ -23,28 +23,19 @@ char[] MESSAGE = "checkpoint 5.1";
 const unsigned char STATE_NOTRUNNING = $00;
 const unsigned char STATE_RUNNING = $01;
 
-// Process Descriptor Block definition
 struct process_descriptor_block {
-  // Unique identifier for the process
   unsigned char process_id;
 
-  // Current state of the process
   unsigned char process_state;
 
-  // Human readable name of the process
   char* process_name;
   
-  // Where this process is stored when not running
-  // i.e., where in the $20000-$5FFFF memory range the
-  // process is stored when not running.
-  unsignd long storage_start_address;
+  unsigned long storage_start_address;
   unsigned long storage_end_address;
- 
-  // Stored registers and related machine state for this
-  // process (for the $D640-$D67E machine state registers)
   unsigned char* stored_state;
-  
 };
+
+void main(){}
 
 // Process stored state will live at $C000-$C7FF, with 256 bytes
 // for each process reserved
@@ -135,9 +126,6 @@ void describe_pdb(unsigned char pdb_number)
 
 
 }
-
-XXX - Copy in your syscalls, RESET() function and entry point tables from
-      checkpoint3.1
 
 void exit_hypervisor() {
   *(unsigned char *)$D67F = $01;
@@ -405,7 +393,6 @@ void reset(){
   memset(COLS, WHITE, 40*25);
   char* sc = SCREEN+40;
   char* msg = MESSAGE;
-  print_to_screen("mart0824 operating system stating...");
   print_newline();
   current_screen_line = SCREEN;
   print_newline();
