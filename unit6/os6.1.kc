@@ -770,10 +770,6 @@ void reset() {
     print_to_screen(MESSAGE);
     print_newline();
     print_newline();
-    / Start
-    with
-    empty
-    message queue
     ipc_message_count = 0;
 // Create message from PID 0 (OS) to PID 1
     queue_message(0, 1, 1, 1, "cpoint 6.1 ");
