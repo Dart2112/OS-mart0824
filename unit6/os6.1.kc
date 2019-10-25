@@ -62,8 +62,7 @@ void queue_message(unsigned char from, unsigned char to,
     m->from = from;
     m->to = to;
     m->priority = priority;
-    m -
-    > sequence = sequence;
+    m->sequence = sequence;
     for (unsigned char i = 0; i < 12; i++) m->message[i] = message[i];
     ipc_message_count = 1;
 }
