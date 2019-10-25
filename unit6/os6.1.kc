@@ -43,11 +43,6 @@ struct process_descriptor_block {
     unsigned char *stored_state;
 };
 
-/
-Message structure
-: 16
-bytes in
-total
 struct ipc_message {
     unsigned char from;
     unsigned char to;
