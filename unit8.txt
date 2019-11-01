@@ -1,0 +1,263 @@
+student@OperatingSystemsMEGA65VM:~/repo$ git pull
+remote: Enumerating objects: 17, done.
+remote: Counting objects: 100% (17/17), done.
+remote: Compressing objects: 100% (11/11), done.
+remote: Total 19 (delta 9), reused 14 (delta 6), pack-reused 2
+Unpacking objects: 100% (19/19), done.
+From github.com:Dart2112/OS-mart0824
+   89d4f73..1ca16bf  master     -> origin/master
+Updating 89d4f73..1ca16bf
+Fast-forward
+ accepted.txt    |   1 +
+ checkpoints.pdf | Bin 19926 -> 19607 bytes
+ 2 files changed, 1 insertion(+)
+student@OperatingSystemsMEGA65VM:~/repo$ fetch
+HEAD is now at bcd733b add missing fragment
+Already up to date.
+Running post-fetch script
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+fonts-opendyslexic is already the newest version (20160623-2).
+pastebinit is already the newest version (1.5-2).
+xemacs21 is already the newest version (21.4.24-8).
+0 upgraded, 0 newly installed, 0 to remove and 33 not upgraded.
+student@OperatingSystemsMEGA65VM:~/repo$ unit8
+
+
+Virtual Memory Configuration:
+
+Process #0        Process #1        Process #2        Process #3        
+ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  
+$8AAFxxx -> PF#6  $1F66xxx -> PF#3  $C0BCxxx -> PF#10 $1F0Bxxx -> PF#0  
+$8AB0xxx -> PF#10 $1F67xxx -> PF#11 $C0BDxxx -> PF#23 $9D74xxx -> PF#14 
+$8AB1xxx -> PF#24 $0D31xxx -> PF#17 $C0BExxx -> PF#17 $9E2Fxxx -> PF#8  
+$7CC3xxx -> PF#3  $42B4xxx -> PF#31 $6562xxx -> PF#16 $9E30xxx -> PF#18 
+$7752xxx -> PF#21 $CB62xxx -> PF#11 $6563xxx -> PF#18 $D81Axxx -> PF#29 
+$7753xxx -> PF#29 $4C0Cxxx -> PF#18 $D498xxx -> PF#23 $D81Bxxx -> PF#29 
+$4A0Bxxx -> PF#6  $4C0Dxxx -> PF#0  $D499xxx -> PF#17 $0530xxx -> PF#1  
+$4A0Cxxx -> PF#27 $856Axxx -> PF#23 $C460xxx -> PF#22 $0531xxx -> PF#7  
+                                                        
+Each Page Frame is 4KB in size.
+Page Frame #0 is at $0000000-$0000FFF, Page Frame #1 $0001000-$0001FFF etc.
+
+Virtual address $8AB099F in Process #0 maps to which physical address?
+Enter your answer in hexadecimal, without a leading $ or 0x prefix, e.g., D0203
+a99f
+You answered $000A99F.
+That is correct.
+
+
+Virtual Memory Configuration:
+
+Process #0        Process #1        Process #2        Process #3        
+ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  
+$C477xxx -> PF#10 $C95Bxxx -> PF#18 $49A4xxx -> PF#12 $C934xxx -> PF#10 
+$C478xxx -> PF#14 $C95Cxxx -> PF#26 $481Exxx -> PF#21 $C935xxx -> PF#30 
+$4866xxx -> PF#3  $C95Dxxx -> PF#9  $481Fxxx -> PF#9  $C936xxx -> PF#2  
+$4867xxx -> PF#17 $6F95xxx -> PF#30 $4820xxx -> PF#25 $5807xxx -> PF#30 
+$9B13xxx -> PF#5  $6F96xxx -> PF#23 $2914xxx -> PF#19 $8F93xxx -> PF#31 
+$9B14xxx -> PF#1  $00F4xxx -> PF#8  $C145xxx -> PF#14 $8F94xxx -> PF#14 
+$9B15xxx -> PF#12 $00F5xxx -> PF#31 $A59Axxx -> PF#1  $77B3xxx -> PF#11 
+$69E0xxx -> PF#4  $4AB6xxx -> PF#3  $5AE5xxx -> PF#27 $AF6Axxx -> PF#31 
+                                                        
+Each Page Frame is 4KB in size.
+Page Frame #0 is at $0000000-$0000FFF, Page Frame #1 $0001000-$0001FFF etc.
+
+Physical address $001EA8B in maps to which virtual address?
+(It is possible for there to be more than one correct answer.)
+Enter your answer in hexadecimal, without a leading $ or 0x prefix, e.g., D020
+6f95a8b
+You answered $6F95A8B.
+That is correct.
+
+
+Virtual Memory Configuration:
+
+Process #0        Process #1        Process #2        Process #3        
+ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  
+$245Bxxx -> PF#26 $6D93xxx -> PF#10 $FAE8xxx -> PF#2  $CF30xxx -> PF#10 
+$245Cxxx -> PF#31 $DC98xxx -> PF#23 $FAE9xxx -> PF#23 $CF31xxx -> PF#13 
+$6FA5xxx -> PF#22 $DC99xxx -> PF#16 $2ECExxx -> PF#21 $CF32xxx -> PF#18 
+$C701xxx -> PF#16 $16F3xxx -> PF#4  $CD9Axxx -> PF#19 $3907xxx -> PF#30 
+$AFB3xxx -> PF#5  $16F4xxx -> PF#17 $CD9Bxxx -> PF#13 $497Dxxx -> PF#16 
+$4FDExxx -> PF#1  $16F5xxx -> PF#21 $8EA3xxx -> PF#8  $39F5xxx -> PF#19 
+$4FDFxxx -> PF#24 $8D7Exxx -> PF#29 $5369xxx -> PF#14 $39F6xxx -> PF#25 
+$5A22xxx -> PF#22 $8D7Fxxx -> PF#31 $ACACxxx -> PF#6  $9B73xxx -> PF#7  
+                                                        
+Each Page Frame is 4KB in size.
+Page Frame #0 is at $0000000-$0000FFF, Page Frame #1 $0001000-$0001FFF etc.
+
+Virtual address $FAE8820 in Process #2 maps to which physical address?
+Enter your answer in hexadecimal, without a leading $ or 0x prefix, e.g., D0203
+2820
+You answered $0002820.
+That is correct.
+
+
+Virtual Memory Configuration:
+
+Process #0        Process #1        Process #2        Process #3        
+ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  
+$3866xxx -> PF#30 $8477xxx -> PF#27 $99E1xxx -> PF#23 $E418xxx -> PF#9  
+$3867xxx -> PF#17 $8478xxx -> PF#12 $99E2xxx -> PF#30 $E419xxx -> PF#26 
+$3868xxx -> PF#31 $8479xxx -> PF#8  $FCF3xxx -> PF#9  $E41Axxx -> PF#15 
+$D5DDxxx -> PF#25 $4FB7xxx -> PF#26 $FCF4xxx -> PF#28 $943Cxxx -> PF#11 
+$6F40xxx -> PF#1  $4FB8xxx -> PF#31 $6796xxx -> PF#6  $F787xxx -> PF#24 
+$6F41xxx -> PF#24 $A2B5xxx -> PF#8  $6797xxx -> PF#20 $F788xxx -> PF#1  
+$2154xxx -> PF#17 $4E47xxx -> PF#13 $11F6xxx -> PF#7  $F789xxx -> PF#27 
+$F282xxx -> PF#8  $EA2Dxxx -> PF#31 $8642xxx -> PF#25 $D942xxx -> PF#16 
+                                                        
+Each Page Frame is 4KB in size.
+Page Frame #0 is at $0000000-$0000FFF, Page Frame #1 $0001000-$0001FFF etc.
+
+Physical address $001EA50 in maps to which virtual address?
+(It is possible for there to be more than one correct answer.)
+Enter your answer in hexadecimal, without a leading $ or 0x prefix, e.g., D020
+99e2a50
+You answered $99E2A50.
+That is correct.
+
+
+Virtual Memory Configuration:
+
+Process #0        Process #1        Process #2        Process #3        
+ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  
+$C6E2xxx -> PF#21 $8F69xxx -> PF#1  $F294xxx -> PF#9  $49D9xxx -> PF#11 
+$C6E3xxx -> PF#31 $8F6Axxx -> PF#14 $F295xxx -> PF#20 $49DAxxx -> PF#5  
+$C6E4xxx -> PF#3  $8F6Bxxx -> PF#1  $F296xxx -> PF#2  $49DBxxx -> PF#27 
+$F2F2xxx -> PF#4  $F431xxx -> PF#4  $6EF9xxx -> PF#27 $4F71xxx -> PF#18 
+$F2F3xxx -> PF#2  $C619xxx -> PF#22 $E385xxx -> PF#14 $4F72xxx -> PF#7  
+$F123xxx -> PF#6  $50FCxxx -> PF#18 $E386xxx -> PF#27 $5A32xxx -> PF#16 
+$450Exxx -> PF#13 $09FDxxx -> PF#18 $EAC2xxx -> PF#2  $C49Fxxx -> PF#18 
+$450Fxxx -> PF#16 $09FExxx -> PF#1  $EAC3xxx -> PF#1  $465Dxxx -> PF#17 
+                                                        
+Each Page Frame is 4KB in size.
+Page Frame #0 is at $0000000-$0000FFF, Page Frame #1 $0001000-$0001FFF etc.
+
+Virtual address $49DBDEC in Process #3 maps to which physical address?
+Enter your answer in hexadecimal, without a leading $ or 0x prefix, e.g., D0203
+1bdec
+You answered $001BDEC.
+That is correct.
+
+
+Virtual Memory Configuration:
+
+Process #0        Process #1        Process #2        Process #3        
+ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  
+$8508xxx -> PF#31 $F36Bxxx -> PF#13 $59C7xxx -> PF#6  $9177xxx -> PF#16 
+$8509xxx -> PF#13 $A44Fxxx -> PF#14 $59C8xxx -> PF#20 $9178xxx -> PF#22 
+$850Axxx -> PF#21 $A450xxx -> PF#30 $30CCxxx -> PF#25 $4576xxx -> PF#19 
+$6321xxx -> PF#11 $A451xxx -> PF#24 $30CDxxx -> PF#24 $250Exxx -> PF#20 
+$6322xxx -> PF#2  $3B93xxx -> PF#0  $F512xxx -> PF#16 $F25Bxxx -> PF#25 
+$C4D5xxx -> PF#14 $8A13xxx -> PF#9  $F513xxx -> PF#11 $F25Cxxx -> PF#18 
+$C4D6xxx -> PF#11 $8A14xxx -> PF#6  $514Cxxx -> PF#17 $DBA9xxx -> PF#6  
+$74EBxxx -> PF#25 $372Cxxx -> PF#24 $2A97xxx -> PF#6  $DBAAxxx -> PF#29 
+                                                        
+Each Page Frame is 4KB in size.
+Page Frame #0 is at $0000000-$0000FFF, Page Frame #1 $0001000-$0001FFF etc.
+
+Physical address $0000D03 in maps to which virtual address?
+(It is possible for there to be more than one correct answer.)
+Enter your answer in hexadecimal, without a leading $ or 0x prefix, e.g., D020
+3b93d03
+You answered $3B93D03.
+That is correct.
+
+
+Virtual Memory Configuration:
+
+Process #0        Process #1        Process #2        Process #3        
+ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  
+$013Bxxx -> PF#19 $75A5xxx -> PF#16 $486Fxxx -> PF#7  $1957xxx -> PF#4  
+$A540xxx -> PF#5  $75A6xxx -> PF#10 $4870xxx -> PF#5  $1958xxx -> PF#26 
+$A541xxx -> PF#22 $75A7xxx -> PF#26 $7A47xxx -> PF#31 $1959xxx -> PF#20 
+$F1A0xxx -> PF#22 $31D9xxx -> PF#3  $7A48xxx -> PF#29 $229Bxxx -> PF#9  
+$DA4Dxxx -> PF#11 $31DAxxx -> PF#8  $AA20xxx -> PF#0  $27F7xxx -> PF#21 
+$0768xxx -> PF#10 $31DBxxx -> PF#26 $AA21xxx -> PF#2  $27F8xxx -> PF#19 
+$0769xxx -> PF#20 $4E85xxx -> PF#23 $100Dxxx -> PF#8  $DC8Cxxx -> PF#30 
+$7C4Axxx -> PF#8  $D867xxx -> PF#15 $2A19xxx -> PF#25 $ED2Fxxx -> PF#16 
+                                                        
+Each Page Frame is 4KB in size.
+Page Frame #0 is at $0000000-$0000FFF, Page Frame #1 $0001000-$0001FFF etc.
+
+Virtual address $75A55C5 in Process #1 maps to which physical address?
+Enter your answer in hexadecimal, without a leading $ or 0x prefix, e.g., D0203
+105c5
+You answered $00105C5.
+That is correct.
+
+
+Virtual Memory Configuration:
+
+Process #0        Process #1        Process #2        Process #3        
+ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  
+$6088xxx -> PF#0  $8507xxx -> PF#18 $891Bxxx -> PF#16 $1C14xxx -> PF#4  
+$7637xxx -> PF#17 $8508xxx -> PF#11 $891Cxxx -> PF#29 $3C5Cxxx -> PF#15 
+$7638xxx -> PF#27 $4D98xxx -> PF#31 $891Dxxx -> PF#7  $3C5Dxxx -> PF#4  
+$7008xxx -> PF#0  $4D99xxx -> PF#18 $142Bxxx -> PF#8  $3C5Exxx -> PF#7  
+$D255xxx -> PF#1  $D4C6xxx -> PF#20 $B244xxx -> PF#15 $B1EAxxx -> PF#7  
+$41BDxxx -> PF#31 $D4C7xxx -> PF#4  $5642xxx -> PF#19 $B1EBxxx -> PF#3  
+$41BExxx -> PF#28 $D4C8xxx -> PF#21 $5643xxx -> PF#16 $B1ECxxx -> PF#25 
+$1BDFxxx -> PF#21 $C238xxx -> PF#21 $5644xxx -> PF#11 $4895xxx -> PF#18 
+                                                        
+Each Page Frame is 4KB in size.
+Page Frame #0 is at $0000000-$0000FFF, Page Frame #1 $0001000-$0001FFF etc.
+
+Physical address $001295A in maps to which virtual address?
+(It is possible for there to be more than one correct answer.)
+Enter your answer in hexadecimal, without a leading $ or 0x prefix, e.g., D020
+850795a
+You answered $850795A.
+That is correct.
+
+
+Virtual Memory Configuration:
+
+Process #0        Process #1        Process #2        Process #3        
+ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  
+$D17Bxxx -> PF#17 $2A41xxx -> PF#24 $96EAxxx -> PF#21 $086Dxxx -> PF#19 
+$C3FBxxx -> PF#1  $3261xxx -> PF#31 $96EBxxx -> PF#22 $086Exxx -> PF#10 
+$C3FCxxx -> PF#1  $3262xxx -> PF#23 $96ECxxx -> PF#1  $086Fxxx -> PF#7  
+$C3FDxxx -> PF#13 $2125xxx -> PF#18 $BE1Bxxx -> PF#4  $CAEDxxx -> PF#1  
+$BE2Axxx -> PF#13 $9813xxx -> PF#3  $AC74xxx -> PF#2  $B664xxx -> PF#6  
+$A13Dxxx -> PF#27 $4B83xxx -> PF#31 $3330xxx -> PF#21 $743Exxx -> PF#2  
+$A13Exxx -> PF#29 $4B84xxx -> PF#16 $3994xxx -> PF#16 $743Fxxx -> PF#6  
+$A13Fxxx -> PF#1  $801Cxxx -> PF#18 $250Axxx -> PF#20 $7440xxx -> PF#19 
+                                                        
+Each Page Frame is 4KB in size.
+Page Frame #0 is at $0000000-$0000FFF, Page Frame #1 $0001000-$0001FFF etc.
+
+Virtual address $BE1BA75 in Process #2 maps to which physical address?
+Enter your answer in hexadecimal, without a leading $ or 0x prefix, e.g., D0203
+4a75
+You answered $0004A75.
+That is correct.
+
+
+Virtual Memory Configuration:
+
+Process #0        Process #1        Process #2        Process #3        
+ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  ADDRESS     PAGE  
+$EFFExxx -> PF#16 $DFA0xxx -> PF#23 $9663xxx -> PF#24 $D76Exxx -> PF#19 
+$EFFFxxx -> PF#3  $DFA1xxx -> PF#29 $9664xxx -> PF#20 $8B42xxx -> PF#25 
+$F000xxx -> PF#9  $DFA2xxx -> PF#10 $9CC5xxx -> PF#21 $8B43xxx -> PF#11 
+$A47Exxx -> PF#9  $7383xxx -> PF#14 $1F99xxx -> PF#20 $8B44xxx -> PF#26 
+$105Bxxx -> PF#31 $7384xxx -> PF#30 $1F9Axxx -> PF#2  $0E15xxx -> PF#25 
+$1812xxx -> PF#27 $31C4xxx -> PF#12 $1F9Bxxx -> PF#7  $0E16xxx -> PF#12 
+$FE87xxx -> PF#6  $31C5xxx -> PF#2  $8C7Dxxx -> PF#4  $0E17xxx -> PF#24 
+$FE88xxx -> PF#25 $1428xxx -> PF#10 $E885xxx -> PF#20 $5158xxx -> PF#25 
+                                                        
+Each Page Frame is 4KB in size.
+Page Frame #0 is at $0000000-$0000FFF, Page Frame #1 $0001000-$0001FFF etc.
+
+Physical address $0004BF5 in maps to which virtual address?
+(It is possible for there to be more than one correct answer.)
+Enter your answer in hexadecimal, without a leading $ or 0x prefix, e.g., D020
+8c7dbf5
+You answered $8C7DBF5.
+That is correct.
+
+You have earned checkpoints 8.1 - 8.5
+student@OperatingSystemsMEGA65VM:~/repo$ 
