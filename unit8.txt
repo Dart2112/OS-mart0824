@@ -1,27 +1,3 @@
-student@OperatingSystemsMEGA65VM:~/repo$ git pull
-remote: Enumerating objects: 17, done.
-remote: Counting objects: 100% (17/17), done.
-remote: Compressing objects: 100% (11/11), done.
-remote: Total 19 (delta 9), reused 14 (delta 6), pack-reused 2
-Unpacking objects: 100% (19/19), done.
-From github.com:Dart2112/OS-mart0824
-   89d4f73..1ca16bf  master     -> origin/master
-Updating 89d4f73..1ca16bf
-Fast-forward
- accepted.txt    |   1 +
- checkpoints.pdf | Bin 19926 -> 19607 bytes
- 2 files changed, 1 insertion(+)
-student@OperatingSystemsMEGA65VM:~/repo$ fetch
-HEAD is now at bcd733b add missing fragment
-Already up to date.
-Running post-fetch script
-Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-fonts-opendyslexic is already the newest version (20160623-2).
-pastebinit is already the newest version (1.5-2).
-xemacs21 is already the newest version (21.4.24-8).
-0 upgraded, 0 newly installed, 0 to remove and 33 not upgraded.
 student@OperatingSystemsMEGA65VM:~/repo$ unit8
 
 
@@ -260,4 +236,3 @@ You answered $8C7DBF5.
 That is correct.
 
 You have earned checkpoints 8.1 - 8.5
-student@OperatingSystemsMEGA65VM:~/repo$ 
